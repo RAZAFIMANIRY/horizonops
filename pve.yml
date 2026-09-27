@@ -1,0 +1,5 @@
+default:
+  user: prometheus@pve
+  token_name: monitoring
+  token_value: c8ffd2eb-95af-4c17-b000-608995211bde
+  verify_ssl: false

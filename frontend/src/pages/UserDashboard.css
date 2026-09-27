@@ -1,0 +1,1771 @@
+/* =========================================================
+   HORIZONOPS - USER DASHBOARD
+   Interface utilisateur standard - lecture seule
+========================================================= */
+
+.ud-page {
+  --ud-background: var(--background, #f4f7fb);
+  --ud-card: var(--card, #ffffff);
+  --ud-card-hover: var(--card-hover, #f8fafc);
+
+  --ud-text: var(--text, #111827);
+  --ud-muted: var(--muted, #64748b);
+  --ud-border: var(--border, #e2e8f0);
+
+  --ud-grid: rgba(100, 116, 139, 0.16);
+
+  --ud-primary: var(--primary, #2563eb);
+  --ud-primary-soft: rgba(37, 99, 235, 0.10);
+
+  --ud-success: #16a34a;
+  --ud-success-soft: rgba(22, 163, 74, 0.10);
+
+  --ud-danger: #dc2626;
+  --ud-danger-soft: rgba(220, 38, 38, 0.10);
+
+  --ud-warning: #d97706;
+  --ud-warning-soft: rgba(217, 119, 6, 0.10);
+
+  --ud-purple: #7c3aed;
+  --ud-purple-soft: rgba(124, 58, 237, 0.10);
+
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 24px;
+
+  box-sizing: border-box;
+
+  background: var(--ud-background);
+  color: var(--ud-text);
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.ud-container {
+  width: 100%;
+  max-width: 1500px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+[data-theme="dark"] .ud-page,
+.dark .ud-page {
+  --ud-background: #0b1120;
+
+  --ud-card: #111827;
+  --ud-card-hover: #172033;
+
+  --ud-text: #f1f5f9;
+  --ud-muted: #94a3b8;
+
+  --ud-border: #243044;
+
+  --ud-grid: rgba(148, 163, 184, 0.12);
+
+  --ud-primary: #60a5fa;
+  --ud-primary-soft: rgba(96, 165, 250, 0.12);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.ud-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  margin-bottom: 24px;
+}
+
+
+.ud-header-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  min-width: 0;
+}
+
+
+.ud-brand-icon {
+  width: 46px;
+  height: 46px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: var(--ud-primary-soft);
+  color: var(--ud-primary);
+
+  box-shadow:
+    0 4px 12px
+    rgba(37, 99, 235, 0.08);
+}
+
+
+.ud-header-left h1 {
+  margin: 0;
+
+  color: var(--ud-text);
+
+  font-size: 21px;
+  line-height: 1.2;
+
+  font-weight: 700;
+}
+
+
+.ud-header-left p {
+  margin: 5px 0 0;
+
+  color: var(--ud-muted);
+
+  font-size: 12px;
+}
+
+
+.ud-header-right {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 9px;
+
+  flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   DERNIÈRE MISE À JOUR
+========================================================= */
+
+.ud-last-update {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-right: 4px;
+
+  color: var(--ud-muted);
+
+  font-size: 10px;
+
+  white-space: nowrap;
+}
+
+
+.ud-live-dot {
+  width: 7px;
+  height: 7px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--ud-success);
+
+  box-shadow:
+    0 0 0 3px
+    var(--ud-success-soft);
+
+  animation: ud-pulse 1.8s infinite;
+}
+
+
+/* =========================================================
+   BOUTONS
+========================================================= */
+
+.ud-refresh-button,
+.ud-logout-button,
+.ud-icon-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  min-height: 38px;
+
+  padding: 0 13px;
+
+  border: 1px solid var(--ud-border);
+
+  border-radius: 9px;
+
+  background: var(--ud-card);
+  color: var(--ud-text);
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.ud-refresh-button:hover:not(:disabled) {
+  background: var(--ud-card-hover);
+
+  border-color: var(--ud-primary);
+
+  color: var(--ud-primary);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 4px 12px
+    rgba(37, 99, 235, 0.08);
+}
+
+
+.ud-refresh-button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+
+.ud-refresh-button svg.ud-spin {
+  animation: ud-spin 0.9s linear infinite;
+}
+
+
+/* =========================================================
+   DÉCONNEXION
+========================================================= */
+
+.ud-logout-button:hover {
+  background: var(--ud-danger-soft);
+
+  border-color: var(--ud-danger);
+
+  color: var(--ud-danger);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 4px 12px
+    rgba(220, 38, 38, 0.08);
+}
+
+
+/* =========================================================
+   FOCUS ACCESSIBLE
+========================================================= */
+
+.ud-refresh-button:focus-visible,
+.ud-logout-button:focus-visible,
+.ud-icon-button:focus-visible {
+  outline: 2px solid var(--ud-primary);
+
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   ALERT
+========================================================= */
+
+.ud-alert {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  margin-bottom: 20px;
+
+  padding: 14px 16px;
+
+  border: 1px solid
+    var(--ud-danger);
+
+  border-radius: 10px;
+
+  background: var(--ud-danger-soft);
+
+  color: var(--ud-danger);
+
+  box-sizing: border-box;
+}
+
+
+.ud-alert > svg {
+  flex-shrink: 0;
+
+  margin-top: 1px;
+}
+
+
+.ud-alert strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--ud-danger);
+
+  font-size: 12px;
+}
+
+
+.ud-alert p {
+  margin: 0;
+
+  color: var(--ud-muted);
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   STATISTIQUES PRINCIPALES
+========================================================= */
+
+.ud-stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-bottom: 22px;
+}
+
+
+.ud-stat-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  min-height: 96px;
+
+  padding: 16px;
+
+  border: 1px solid
+    var(--ud-border);
+
+  border-radius: 12px;
+
+  background: var(--ud-card);
+
+  box-sizing: border-box;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.ud-stat-card:hover {
+  transform: translateY(-2px);
+
+  border-color: var(--ud-primary);
+
+  box-shadow:
+    0 8px 20px
+    rgba(15, 23, 42, 0.06);
+}
+
+
+.ud-stat-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: var(--ud-primary-soft);
+
+  color: var(--ud-primary);
+}
+
+
+.ud-stat-content {
+  min-width: 0;
+}
+
+
+.ud-stat-content span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--ud-muted);
+
+  font-size: 11px;
+}
+
+
+.ud-stat-content strong {
+  display: block;
+
+  color: var(--ud-text);
+
+  font-size: 21px;
+
+  line-height: 1.1;
+}
+
+
+.ud-stat-detail {
+  margin-top: 5px;
+
+  color: var(--ud-muted);
+
+  font-size: 9px !important;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.ud-section {
+  margin-bottom: 22px;
+}
+
+
+.ud-section-header {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 13px;
+}
+
+
+.ud-section-header h2 {
+  margin: 0;
+
+  color: var(--ud-text);
+
+  font-size: 15px;
+
+  line-height: 1.3;
+
+  font-weight: 700;
+}
+
+
+.ud-section-header p {
+  margin: 4px 0 0;
+
+  color: var(--ud-muted);
+
+  font-size: 11px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   BADGE SURVEILLANCE
+========================================================= */
+
+.ud-section-live {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 6px 9px;
+
+  border: 1px solid
+    var(--ud-border);
+
+  border-radius: 999px;
+
+  background: var(--ud-card);
+
+  color: var(--ud-muted);
+
+  font-size: 10px;
+
+  white-space: nowrap;
+}
+
+
+.ud-section-live > span {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: var(--ud-muted);
+}
+
+
+.ud-section-live.is-live {
+  color: var(--ud-success);
+
+  border-color:
+    rgba(22, 163, 74, 0.25);
+
+  background:
+    var(--ud-success-soft);
+}
+
+
+.ud-section-live.is-live > span {
+  background: var(--ud-success);
+
+  box-shadow:
+    0 0 0 3px
+    var(--ud-success-soft);
+
+  animation:
+    ud-pulse 1.8s infinite;
+}
+
+
+/* =========================================================
+   ÉTAT DES SYSTÈMES
+========================================================= */
+
+.ud-system-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+
+.ud-system-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-height: 82px;
+
+  padding: 14px;
+
+  border: 1px solid
+    var(--ud-border);
+
+  border-radius: 11px;
+
+  background: var(--ud-card);
+
+  box-sizing: border-box;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+
+.ud-system-status:hover {
+  border-color:
+    rgba(37, 99, 235, 0.45);
+
+  background: var(--ud-card-hover);
+}
+
+
+.ud-system-icon {
+  width: 39px;
+  height: 39px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: var(--ud-primary-soft);
+
+  color: var(--ud-primary);
+}
+
+
+.ud-system-info {
+  min-width: 0;
+
+  flex: 1;
+}
+
+
+.ud-system-info strong {
+  display: block;
+
+  color: var(--ud-text);
+
+  font-size: 12px;
+}
+
+
+.ud-system-info span {
+  display: block;
+
+  margin-top: 4px;
+
+  color: var(--ud-muted);
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+
+.ud-system-state {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  flex-shrink: 0;
+
+  white-space: nowrap;
+
+  font-size: 9px;
+
+  font-weight: 600;
+}
+
+
+.ud-system-state.is-running {
+  color: var(--ud-success);
+}
+
+
+.ud-system-state.is-stopped {
+  color: var(--ud-danger);
+}
+
+
+.ud-system-state.is-unknown {
+  color: var(--ud-muted);
+}
+
+
+/* =========================================================
+   MÉTRIQUES
+========================================================= */
+
+.ud-metrics-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+
+.ud-metric-card {
+  min-height: 170px;
+
+  padding: 16px;
+
+  border: 1px solid
+    var(--ud-border);
+
+  border-radius: 12px;
+
+  background: var(--ud-card);
+
+  box-sizing: border-box;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+.ud-metric-card:hover {
+  border-color:
+    rgba(37, 99, 235, 0.4);
+
+  transform: translateY(-1px);
+}
+
+
+.ud-metric-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 18px;
+}
+
+
+.ud-metric-header > div:first-child {
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+.ud-metric-label {
+  color: var(--ud-muted);
+
+  font-size: 11px;
+}
+
+
+.ud-metric-header strong {
+  margin-top: 5px;
+
+  color: var(--ud-text);
+
+  font-size: 19px;
+
+  line-height: 1.1;
+}
+
+
+.ud-metric-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: var(--ud-primary-soft);
+
+  color: var(--ud-primary);
+}
+
+
+/* =========================================================
+   BARRE DE PROGRESSION
+========================================================= */
+
+.ud-progress {
+  width: 100%;
+  height: 7px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background:
+    var(--ud-border);
+}
+
+
+.ud-progress-bar {
+  height: 100%;
+
+  min-width: 0;
+
+  max-width: 100%;
+
+  border-radius: inherit;
+
+  background: var(--ud-primary);
+
+  transition:
+    width 0.5s ease;
+}
+
+
+.ud-metric-footer {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-top: 10px;
+}
+
+
+.ud-metric-footer span {
+  color: var(--ud-muted);
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   RÉSEAU
+========================================================= */
+
+.ud-network-values {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-top: 25px;
+}
+
+
+.ud-network-values > div {
+  padding: 13px;
+
+  border: 1px solid
+    var(--ud-border);
+
+  border-radius: 9px;
+
+  background: var(--ud-card-hover);
+
+  box-sizing: border-box;
+}
+
+
+.ud-network-values span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: var(--ud-muted);
+
+  font-size: 10px;
+}
+
+
+.ud-network-values strong {
+  display: block;
+
+  color: var(--ud-text);
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   GRAPHIQUES
+========================================================= */
+
+.ud-chart-card {
+  width: 100%;
+
+  min-height: 320px;
+
+  padding: 16px;
+
+  border: 1px solid
+    var(--ud-border);
+
+  border-radius: 12px;
+
+  background: var(--ud-card);
+
+  box-sizing: border-box;
+}
+
+
+.ud-chart-card .recharts-wrapper {
+  max-width: 100%;
+}
+
+
+.ud-chart-card
+.recharts-cartesian-grid-horizontal
+line,
+.ud-chart-card
+.recharts-cartesian-grid-vertical
+line {
+  stroke: var(--ud-grid);
+}
+
+
+.ud-chart-card
+.recharts-cartesian-axis-tick-value {
+  fill: var(--ud-muted);
+}
+
+
+.ud-chart-card
+.recharts-text {
+  fill: var(--ud-muted);
+}
+
+
+.ud-chart-card
+.recharts-default-tooltip {
+  border: 1px solid
+    var(--ud-border) !important;
+
+  border-radius: 8px !important;
+
+  background: var(--ud-card) !important;
+
+  color: var(--ud-text) !important;
+}
+
+
+.ud-chart-card
+.recharts-tooltip-wrapper {
+  outline: none;
+}
+
+
+.ud-chart-card
+.recharts-legend-item-text {
+  color: var(--ud-muted) !important;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   GRAPHIQUE VIDE
+========================================================= */
+
+.ud-empty-chart {
+  width: 100%;
+  height: 285px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  color: var(--ud-muted);
+
+  font-size: 11px;
+}
+
+
+.ud-empty-chart svg {
+  color: var(--ud-primary);
+
+  opacity: 0.7;
+}
+
+
+/* =========================================================
+   RÉSUMÉ DES RESSOURCES
+========================================================= */
+
+.ud-resource-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+
+.ud-resource-summary-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  min-height: 70px;
+
+  padding: 13px;
+
+  border: 1px solid
+    var(--ud-border);
+
+  border-radius: 10px;
+
+  background: var(--ud-card);
+
+  box-sizing: border-box;
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.ud-resource-summary-card:hover {
+  border-color:
+    rgba(37, 99, 235, 0.4);
+
+  transform: translateY(-1px);
+}
+
+
+.ud-resource-summary-card > svg {
+  flex-shrink: 0;
+
+  color: var(--ud-primary);
+}
+
+
+.ud-resource-summary-card div {
+  min-width: 0;
+}
+
+
+.ud-resource-summary-card span {
+  display: block;
+
+  color: var(--ud-muted);
+
+  font-size: 10px;
+}
+
+
+.ud-resource-summary-card strong {
+  display: block;
+
+  margin-top: 4px;
+
+  color: var(--ud-text);
+
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   BADGE LECTURE SEULE
+========================================================= */
+
+.ud-readonly-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 6px 9px;
+
+  border: 1px solid
+    var(--ud-border);
+
+  border-radius: 999px;
+
+  background: var(--ud-primary-soft);
+
+  color: var(--ud-primary);
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   TABLEAU
+========================================================= */
+
+.ud-table-wrapper {
+  width: 100%;
+
+  overflow-x: auto;
+
+  border: 1px solid
+    var(--ud-border);
+
+  border-radius: 12px;
+
+  background: var(--ud-card);
+
+  box-sizing: border-box;
+}
+
+
+.ud-table {
+  width: 100%;
+
+  min-width: 760px;
+
+  border-collapse: collapse;
+}
+
+
+.ud-table th {
+  padding: 12px 14px;
+
+  border-bottom: 1px solid
+    var(--ud-border);
+
+  background: var(--ud-card-hover);
+
+  color: var(--ud-muted);
+
+  text-align: left;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.03em;
+}
+
+
+.ud-table td {
+  padding: 13px 14px;
+
+  border-bottom: 1px solid
+    var(--ud-border);
+
+  color: var(--ud-text);
+
+  font-size: 11px;
+
+  white-space: nowrap;
+}
+
+
+.ud-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+.ud-table tbody tr {
+  transition:
+    background-color 0.15s ease;
+}
+
+
+.ud-table tbody tr:hover {
+  background: var(--ud-card-hover);
+}
+
+
+.ud-table td strong {
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   TYPE VM / LXC
+========================================================= */
+
+.ud-type-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 34px;
+
+  padding: 4px 7px;
+
+  border-radius: 6px;
+
+  background: var(--ud-primary-soft);
+
+  color: var(--ud-primary);
+
+  font-size: 9px;
+
+  font-weight: 700;
+}
+
+
+.ud-type-vm {
+  background: var(--ud-primary-soft);
+
+  color: var(--ud-primary);
+}
+
+
+.ud-type-lxc {
+  background: var(--ud-purple-soft);
+
+  color: var(--ud-purple);
+}
+
+
+/* =========================================================
+   STATUT DES RESSOURCES
+========================================================= */
+
+.ud-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  white-space: nowrap;
+
+  font-size: 10px;
+
+  font-weight: 600;
+}
+
+
+.ud-status-running {
+  color: var(--ud-success);
+}
+
+
+.ud-status-stopped {
+  color: var(--ud-danger);
+}
+
+
+.ud-status-unknown {
+  color: var(--ud-muted);
+}
+
+
+/* =========================================================
+   ÉTAT VIDE
+========================================================= */
+
+.ud-empty-state {
+  min-height: 180px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 25px;
+
+  color: var(--ud-muted);
+
+  text-align: center;
+}
+
+
+.ud-empty-state svg {
+  margin-bottom: 4px;
+
+  color: var(--ud-primary);
+
+  opacity: 0.75;
+}
+
+
+.ud-empty-state strong {
+  color: var(--ud-text);
+
+  font-size: 12px;
+}
+
+
+.ud-empty-state span {
+  max-width: 420px;
+
+  color: var(--ud-muted);
+
+  font-size: 10px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   INFORMATIONS - LECTURE SEULE
+========================================================= */
+
+.ud-info-box {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  margin-bottom: 22px;
+
+  padding: 14px 16px;
+
+  border: 1px solid
+    var(--ud-border);
+
+  border-radius: 10px;
+
+  background: var(--ud-card);
+
+  box-sizing: border-box;
+}
+
+
+.ud-info-icon {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: var(--ud-primary-soft);
+
+  color: var(--ud-primary);
+}
+
+
+.ud-info-box strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--ud-text);
+
+  font-size: 11px;
+}
+
+
+.ud-info-box p {
+  margin: 0;
+
+  color: var(--ud-muted);
+
+  font-size: 10px;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.ud-footer {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding: 18px 2px 4px;
+
+  border-top: 1px solid
+    var(--ud-border);
+
+  color: var(--ud-muted);
+
+  font-size: 10px;
+}
+
+
+.ud-footer > div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+.ud-footer strong {
+  color: var(--ud-text);
+
+  font-size: 10px;
+}
+
+
+.ud-footer span {
+  color: var(--ud-muted);
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.ud-loading {
+  min-height: 70vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  background: var(--ud-background);
+
+  color: var(--ud-text);
+
+  text-align: center;
+}
+
+
+.ud-loading-spinner {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 8px;
+
+  border-radius: 12px;
+
+  background: var(--ud-primary-soft);
+
+  color: var(--ud-primary);
+}
+
+
+.ud-loading-spinner svg {
+  animation:
+    ud-spin 1s linear infinite;
+}
+
+
+.ud-loading strong {
+  font-size: 13px;
+}
+
+
+.ud-loading > span {
+  color: var(--ud-muted);
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes ud-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+@keyframes ud-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLETTE
+========================================================= */
+
+@media (max-width: 1200px) {
+
+  .ud-stats-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .ud-resource-summary {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLETTE PETITE
+========================================================= */
+
+@media (max-width: 950px) {
+
+  .ud-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+
+  .ud-header-right {
+    width: 100%;
+
+    justify-content: flex-start;
+  }
+
+
+  .ud-system-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+  .ud-page {
+    padding: 16px;
+  }
+
+
+  .ud-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .ud-system-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .ud-section-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+
+  .ud-section-live,
+  .ud-readonly-badge {
+    align-self: flex-start;
+  }
+
+
+  .ud-footer {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - PETIT MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .ud-page {
+    padding: 12px;
+  }
+
+
+  .ud-header-left h1 {
+    font-size: 18px;
+  }
+
+
+  .ud-header-left p {
+    font-size: 10px;
+  }
+
+
+  .ud-header-right {
+    display: grid;
+
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 8px;
+  }
+
+
+  .ud-last-update {
+    grid-column: 1 / -1;
+
+    justify-content: flex-start;
+
+    margin-right: 0;
+  }
+
+
+  .ud-refresh-button,
+  .ud-logout-button {
+    width: 100%;
+  }
+
+
+  .ud-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .ud-resource-summary {
+    grid-template-columns: 1fr;
+  }
+
+
+  .ud-network-values {
+    grid-template-columns: 1fr;
+  }
+
+
+  .ud-stat-card {
+    min-height: 88px;
+
+    padding: 14px;
+  }
+
+
+  .ud-stat-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+
+  .ud-stat-content strong {
+    font-size: 19px;
+  }
+
+
+  .ud-chart-card {
+    padding: 10px;
+  }
+
+
+  .ud-table-wrapper {
+    border-radius: 9px;
+  }
+
+
+  .ud-info-box {
+    padding: 13px;
+  }
+
+}
+
+
+/* =========================================================
+   TRÈS PETIT ÉCRAN
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .ud-header-right {
+    grid-template-columns: 1fr;
+  }
+
+
+  .ud-last-update {
+    grid-column: auto;
+  }
+
+
+  .ud-brand-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+
+  .ud-header-left {
+    gap: 10px;
+  }
+
+
+  .ud-metric-card {
+    padding: 13px;
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITÉ
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .ud-page *,
+  .ud-page *::before,
+  .ud-page *::after {
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+
+}
